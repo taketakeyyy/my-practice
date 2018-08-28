@@ -101,17 +101,34 @@ def neuralnet_mnist_test():
 
         return y
 
-    x, t = get_data()
-    network = init_network()
+    def exec():
+        x, t = get_data()
+        network = init_network()
 
-    accuracy_cnt = 0
-    for i in range(len(x)):
-        y = predict(network, x[i])
-        p = np.argmax(y) # 最も確率の高い要素のインデックスを取得
-        if p == t[i]:
-            accuracy_cnt += 1
+        accuracy_cnt = 0
+        for i in range(len(x)):
+            y = predict(network, x[i])
+            p = np.argmax(y) # 最も確率の高い要素のインデックスを取得
+            if p == t[i]:
+                accuracy_cnt += 1
 
-    print("Accuracy:" + str(float(accuracy_cnt / len(x))))  # 0.9352
+        print("Accuracy:" + str(float(accuracy_cnt / len(x))))  # 0.9352
+
+    def exec2():
+        x, t = get_data()
+        network = init_network()
+
+        batch_size = 100 # バッチの数
+        accuracy_cnt = 0
+        for i in range(0, len(x), batch_size):
+            x_batch = x[i:i+batch_size]
+            y_batch = predict(network, x_batch)
+            p = np.argmax(y_batch, axis=1)
+            accuracy_cnt += np.sum(p == t[i:i+batch_size])
+
+        print("Accuracy:" + str(float(accuracy_cnt / len(x))))  # 0.9352
+
+    exec2()
 
 if __name__ == "__main__":
     #sigmoid_test()
