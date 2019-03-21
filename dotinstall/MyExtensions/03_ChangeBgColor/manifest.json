@@ -1,0 +1,28 @@
+{
+    "manifest_version": 2,
+    "name": "Change Bg Color",
+    "version": "1.0",
+    // ここまで必須
+    "browser_action": {
+        "default_icon": {
+            "16": "icon.png"  // 16x16のアイコン
+        },
+        "default_popup": "popup.html"
+    },
+
+    // Chrome拡張がタブなどにアクセスするためにはパーミッションが必要
+    // * 全てのhttpで始まるサイトで許可する
+    // "http://*/*"
+
+    // * 全てのhttpsで始まるサイトで許可する
+    // "https://*/*"
+
+    // * ローカルも含め、すべてのサイトで許可する
+    // "<all_urls>"
+
+    // * 現在のタブだけ
+    // "activeTab"
+    "permissions": [
+        "activeTab"
+    ]
+}

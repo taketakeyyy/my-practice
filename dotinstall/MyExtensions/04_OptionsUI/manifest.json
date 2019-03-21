@@ -1,0 +1,44 @@
+{
+    "manifest_version": 2,
+    "name": "Change Bg Color with options UI",
+    "version": "1.0",
+    // ここまで必須
+    "browser_action": {
+        "default_icon": {
+            "16": "icon.png"  // 16x16のアイコン
+        }
+    },
+
+    // オプションページのための設定
+    "options_ui": {
+        "page": "options.html",
+        // chromeのスタイルと統一感を持たせつつオプションページを作成する
+        "chrome_style": true
+    },
+
+    // Chromeにイベントが発生した時の処理を書くことができるイベントページを設定する
+    "background": {
+        // 実行したscriptのファイルを指定する
+        "scripts": ["event.js"],
+        // event.jsが常に常駐するのではなくて、イベントが起きた時だけ起動するようにする
+        "persistent": false
+    },
+
+    // Chrome拡張がタブなどにアクセスするためにはパーミッションが必要
+    // * 全てのhttpで始まるサイトで許可する
+    // "http://*/*"
+
+    // * 全てのhttpsで始まるサイトで許可する
+    // "https://*/*"
+
+    // * ローカルも含め、すべてのサイトで許可する
+    // "<all_urls>"
+
+    // * 現在のタブだけ
+    // "activeTab"
+    "permissions": [
+        "activeTab",
+        // オプションの値を保持するために、chromeのストレージ機能を使うため、storageを許可する
+        "storage"
+    ]
+}

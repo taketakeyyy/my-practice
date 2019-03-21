@@ -1,0 +1,12 @@
+{
+    "manifest_version": 2,
+    "name": "Hello!",
+    "version": "1.0",
+    // ここまで必須
+    "browser_action": {
+        "default_icon": {
+            "16": "icon.png"  // 16x16のアイコン
+        },
+        "default_popup": "popup.html"
+    }
+}
