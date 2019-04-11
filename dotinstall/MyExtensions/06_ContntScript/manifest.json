@@ -1,0 +1,15 @@
+{
+    "manifest_version": 2,
+    "name": "Count links",
+    "version": "1.0",
+    // ここまで必須
+
+    "content_scripts":[
+        // どのサイトに対してどのスクリプトを仕込むかを複数指定できる。
+        {
+            "matches": ["<all_urls>"],
+            // 差し込むスクリプトは、JSやCSSを仕込める。今回はJS
+            "js": ["content.js"]
+        }
+    ]
+}

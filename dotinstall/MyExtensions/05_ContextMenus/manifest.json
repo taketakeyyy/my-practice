@@ -1,0 +1,32 @@
+{
+    "manifest_version": 2,
+    "name": "Change Bg Color with context menus",
+    "version": "1.0",
+    // ここまで必須
+
+    // Chromeにイベントが発生した時の処理を書くことができるイベントページを設定する
+    "background": {
+        // 実行したscriptのファイルを指定する
+        "scripts": ["event.js"],
+        // event.jsが常に常駐するのではなくて、イベントが起きた時だけ起動するようにする
+        "persistent": false
+    },
+
+    // Chrome拡張がタブなどにアクセスするためにはパーミッションが必要
+    // * 全てのhttpで始まるサイトで許可する
+    // "http://*/*"
+
+    // * 全てのhttpsで始まるサイトで許可する
+    // "https://*/*"
+
+    // * ローカルも含め、すべてのサイトで許可する
+    // "<all_urls>"
+
+    // * 現在のタブだけ
+    // "activeTab"
+    "permissions": [
+        "activeTab",
+        // 右クリック機能を使うため、contextMenusを許可する
+        "contextMenus"
+    ]
+}
