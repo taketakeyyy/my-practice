@@ -59,13 +59,12 @@ class BellmanFord():
         
         return d
     
-    def exist_negative_loop(self, d):
+    def exist_negative_loop(self):
         """ 負の閉路が存在するか否か
-        Args:
-            d(list): shortest_pathで求めた最短路を格納したリスト
         Returns:
             (bool): 負の閉路が存在する(True)/しない(False)
         """
+        d = [0] * self.V
         for i in range(self.V):
             for j in range(self.E):
                 e = self.edges[j]
@@ -76,19 +75,9 @@ class BellmanFord():
         return False
 
 
-def sample():
-    """
-    from to cost
-    0 1 5
-    0 2 4
-    1 2 -2
-    1 3 1
-    2 3 2
-    2 4 1
-    2 5 4
-    3 5 3
-    4 5 4
-    """
+def sample1():
+    print("---sample1---")
+
     bf = BellmanFord()
     bf.add(0, 1, 5)
     bf.add(0, 2, 4)
@@ -100,11 +89,60 @@ def sample():
     bf.add(3, 5, 3)
     bf.add(4, 5, 4)
 
+    print(f"bf.exist_negatve_loop(): {bf.exist_negative_loop()}")
+
     path = bf.shortest_path(0)
+    print(f"path: {path}")
 
-    print(path)
 
-    print(bf.exist_negative_loop(path))
+def sample2():
+    print("---sample2---")
+
+    bf = BellmanFord()
+    bf.add(0, 1, 5)
+    bf.add(0, 2, 4)
+    bf.add(1, 2, -2)
+    bf.add(1, 3, 1)
+    bf.add(2, 3, 2)
+    bf.add(2, 4, 1)
+    bf.add(2, 5, 4)
+    bf.add(3, 1, -1)
+    bf.add(3, 5, 3)
+    bf.add(4, 5, 4)
+
+    print(f"bf.exist_negatve_loop(): {bf.exist_negative_loop()}")
+
+    # 負の閉路が存在するので、最短路は求まらない
+    #path = bf.shortest_path(0)
+    #print(f"path: {path}")
+
+
+def sample3():
+    print("---sample3---")
+
+    bf = BellmanFord()
+    bf.add(0, 1, 5)
+    bf.add(0, 2, 4)
+    bf.add(1, 2, -2)
+    bf.add(1, 3, 1)
+    bf.add(2, 3, 2)
+    bf.add(2, 4, 1)
+    bf.add(2, 5, 4)
+    bf.add(3, 5, 3)
+    bf.add(4, 5, 4)
+    bf.add(3, 6, -1)
+    bf.add(6, 7, -1)
+    bf.add(7, 8, -1)
+    bf.add(8, 6, -1)
+
+    print(f"bf.exist_negatve_loop(): {bf.exist_negative_loop()}")
+    
+    # 負の閉路が存在するので、最短路は求まらない
+    #path = bf.shortest_path(0)
+    #print(f"path: {path}")
+
 
 if __name__ == "__main__":
-    sample()
+    sample1()
+    sample2()
+    sample3()
