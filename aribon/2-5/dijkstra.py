@@ -83,8 +83,8 @@ def sample1():
     djk.add(5, 6, 100)
 
     d = djk.shortest_path(1)
-
     print(d)
+    # [inf, 0, 200, inf, inf, inf, inf, inf, 201, inf]
    
 
 def sample2():
@@ -129,6 +129,7 @@ def sample2():
 
     d = djk.shortest_path(0)
     print(d)
+    # [0, 1, 6, 2, 3, 4, 7, 9]
 
 if __name__ == "__main__":
     sample1()
