@@ -56,19 +56,19 @@ class Dijkstra():
         que = []  # プライオリティキュー（ヒープ木）
         d = [float("inf")] * self.V
         d[s] = 0
-        heapq.heappush(que, (0, s))  # (仮の最短距離, 頂点番号)をヒープに追加する
+        heapq.heappush(que, (0, s))  # 始点の(最短距離, 頂点番号)をヒープに追加する
 
         while len(que) != 0:
-            prov_cost, v = heapq.heappop(que)
-            # キューに格納されている仮の最短距離が、現在計算できている最短距離より大きければ、dの更新をする必要はない
-            if d[v] < prov_cost: continue
+            cost, v = heapq.heappop(que)
+            # キューに格納されている最短経路の候補がdの距離よりも大きければ、他の経路で最短経路が存在するので、処理をスキップ
+            if d[v] < cost: continue
 
             for i in range(len(self.G[v])):
-                # 頂点vに隣接する頂点の最短距離を更新する
+                # 頂点vに隣接する各頂点に関して、頂点vを経由した場合の距離を計算し、今までの距離(d)よりも小さければ更新する
                 e = self.G[v][i]  # vのi個目の隣接辺e
                 if d[e.to] > d[v] + e.cost:
-                    d[e.to] = d[v] + e.cost # dの更新
-                    heapq.heappush(que, (d[e.to], e.to)) # キューに新たな(仮の最短距離, 頂点番号)の情報をpush
+                    d[e.to] = d[v] + e.cost  # dの更新
+                    heapq.heappush(que, (d[e.to], e.to))  # キューに新たな最短経路の候補(最短距離, 頂点番号)の情報をpush
         return d
 
 
