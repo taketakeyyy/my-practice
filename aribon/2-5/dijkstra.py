@@ -56,24 +56,25 @@ class Dijkstra():
         que = []  # プライオリティキュー（ヒープ木）
         d = [float("inf")] * self.V
         d[s] = 0
-        heapq.heappush(que, (0, s))  # (最短距離, 頂点の番号)をヒープに追加する
+        heapq.heappush(que, (0, s))  # 始点の(最短距離, 頂点番号)をヒープに追加する
 
         while len(que) != 0:
-            prov_cost, v = heapq.heappop(que)  # prov_cost := 暫定的な最短距離
-            # キューに格納されている暫定的な最短距離が、現在計算できている最短距離より大きければ、dの更新をする必要はない
-            if d[v] < prov_cost: continue
+            cost, v = heapq.heappop(que)
+            # キューに格納されている最短経路の候補がdの距離よりも大きければ、他の経路で最短経路が存在するので、処理をスキップ
+            if d[v] < cost: continue
 
             for i in range(len(self.G[v])):
-                # 頂点vに隣接する頂点の最短距離を更新する
+                # 頂点vに隣接する各頂点に関して、頂点vを経由した場合の距離を計算し、今までの距離(d)よりも小さければ更新する
                 e = self.G[v][i]  # vのi個目の隣接辺e
                 if d[e.to] > d[v] + e.cost:
-                    d[e.to] = d[v] + e.cost # dの更新
-                    heapq.heappush(que, (d[e.to], e.to)) # キューに新たな仮の距離の情報をpush
+                    d[e.to] = d[v] + e.cost  # dの更新
+                    heapq.heappush(que, (d[e.to], e.to))  # キューに新たな最短経路の候補(最短距離, 頂点番号)の情報をpush
         return d
 
 
 
-def sample():
+def sample1():
+    # 有向グラフの最短路を求める例
     V = 10
     djk = Dijkstra(V)
     djk.add(0, 1, 100)
@@ -81,10 +82,55 @@ def sample():
     djk.add(2, 8, 1)
     djk.add(5, 6, 100)
 
-    d = djk.shortest_path(0)
-
+    d = djk.shortest_path(1)
     print(d)
+    # [inf, 0, 200, inf, inf, inf, inf, inf, 201, inf]
    
 
+def sample2():
+    # 無向グラフの最短路を求める例
+    # https://nw.tsuda.ac.jp/lec/dijkstra/
+    # 上記のサイトの例のグラフの最短路を求める
+    V = 8
+    djk = Dijkstra(V)
+    # 無向辺の場合、両方の向きの有向辺を加える
+    djk.add(0,1,1)
+    djk.add(1,0,1)
+
+    djk.add(0,2,7)
+    djk.add(2,0,7)
+
+    djk.add(0,3,2)
+    djk.add(3,0,2)
+
+    djk.add(1,4,2)
+    djk.add(4,1,2)
+
+    djk.add(1,5,4)
+    djk.add(5,1,4)
+
+    djk.add(2,5,2)
+    djk.add(5,2,2)
+
+    djk.add(2,6,3)
+    djk.add(6,2,3)
+
+    djk.add(3,6,5)
+    djk.add(6,3,5)
+
+    djk.add(4,5,1)
+    djk.add(5,4,1)
+
+    djk.add(5,7,6)
+    djk.add(7,5,6)
+
+    djk.add(6,7,2)
+    djk.add(7,6,2)
+
+    d = djk.shortest_path(0)
+    print(d)
+    # [0, 1, 6, 2, 3, 4, 7, 9]
+
 if __name__ == "__main__":
-    sample()
+    sample1()
+    sample2()
