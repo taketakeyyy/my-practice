@@ -1,0 +1,5 @@
+# Ignore following files
+target/
+target/**
+
+# Don't ignore following files
