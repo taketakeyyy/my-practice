@@ -5,6 +5,7 @@
 """
 
 def solve():
+
     # dp[i][j] := s1...si と i1...tjに対するLCSの長さ
     N, M = list(map(int, input().split()))
     s = input()
