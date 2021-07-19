@@ -1,0 +1,5 @@
+# Ignore following files
+venv/
+venv/**
+.vscode/
+.vscode/**
